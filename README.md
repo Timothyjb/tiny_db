@@ -1,8 +1,6 @@
 # TinyDb
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/tiny_db`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+The purpose of this gem is provide a very simple solution for storing records locally in a text file as json and providing a basic ActivateRecord like interface to access those records.
 
 ## Installation
 
@@ -22,17 +20,61 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Initialize:
+```ruby
+TinyDb.configure do |config|
+  config.db_file_path = "your_file_name.json"
+end
+```
 
-## Development
+### Create file:
+Create a file that matches the `db_file_path` provided above.
+`your_file_name.json`
+```
+{}
+```
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+###
+Example usage:
+```ruby
+class MyModel < TinyDb::FileModel
+  TABLE_NAME = "my_model"
+  ATTRIBUTES = [:id, :name]
+  attr_accessor *ATTRIBUTES
+end
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+```
+
+
+This snippet:
+```ruby
+record = MyModel.new
+record.name = "Timbo"
+record.save
+```
+
+Would result in the json file being updated to:
+```
+{
+    "my_model": [
+        {
+            "id": 1,
+            "name": "Timbo"
+        }
+    ]
+}
+```
+
+### Methods provided:
+- `.new`
+- `.create(key: value)`
+- `.update(key: value)`
+- `.find_by(key: value)`
+- `.destroy`
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/tiny_db.
+Bug reports and pull requests are welcome on GitHub at https://github.com/Timothyjb/tiny_db.
 
 
 ## License
