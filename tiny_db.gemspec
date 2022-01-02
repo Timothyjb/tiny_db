@@ -6,8 +6,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["timothyjb"]
   spec.email         = ["timothyjbarkley@gmail.com"]
 
-  spec.summary       = "Does stuff"
-  spec.description   = "about it"
+  spec.summary       = "Save and access records in json file"
+  spec.description   = "The purpose of this gem is provide a very simple solution for storing records locally in a text file as json and providing a basic ActivateRecord like interface to access those records"
   spec.homepage      = "https://github.com/Timothyjb"
   spec.license       = "MIT"
   spec.required_ruby_version = Gem::Requirement.new(">= 2.3.0")
